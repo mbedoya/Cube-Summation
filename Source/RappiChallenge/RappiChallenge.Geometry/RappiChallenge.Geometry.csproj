@@ -46,6 +46,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\RappiChallenge.Persistence\RappiChallenge.Persistence.csproj">
+      <Project>{f1481bf6-043f-4eba-a71e-d178b168b0ba}</Project>
+      <Name>RappiChallenge.Persistence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RappiChallenge.TO\RappiChallenge.TO.csproj">
       <Project>{3d3e0b86-1dca-4728-8669-4a5a9742bf5c}</Project>
       <Name>RappiChallenge.TO</Name>

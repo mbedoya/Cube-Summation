@@ -1,0 +1,9 @@
+CREATE TABLE `rappitest`.`cube` (
+  `X` TINYINT NOT NULL,
+  `Y` TINYINT NOT NULL,
+  `Z` TINYINT NOT NULL,
+  `NodeValue` BIGINT NOT NULL);
+
+  ALTER TABLE `rappitest`.`cube` 
+ADD COLUMN `ID` BIGINT NOT NULL AUTO_INCREMENT AFTER `NodeValue`,
+ADD PRIMARY KEY (`ID`);

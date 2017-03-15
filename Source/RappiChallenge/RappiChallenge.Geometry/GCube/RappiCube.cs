@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RappiChallenge.TO;
+using RappiChallenge.Persistence;
+using RappiChallenge.Persistence.CubePersistence;
 
 namespace RappiChallenge.Geometry.GCube
 {
@@ -13,16 +15,21 @@ namespace RappiChallenge.Geometry.GCube
     {
         public List<PointTO> GetValues()
         {
-            List<PointTO> points = new List<PointTO>();
-            points.Add(new PointTO() { X = 1, Y = 1, Z = 1, Value = 3 });
-            points.Add(new PointTO() { X = 1, Y = 2, Z = 1, Value = 5 });
-
-            return points;
+            ICubePersistence persistence = PersistenceFactory.GetCubePersistence();
+            return persistence.GetValues();
         }
 
         public int GetDimensions()
         {
-            return 3;
+            ICubePersistence persistence = PersistenceFactory.GetCubePersistence();
+
+            //Check response en return data accordingly
+            int dimensions = persistence.GetDimensions();
+            if(dimensions == 0)
+            {
+                dimensions = -1;
+            }
+            return dimensions;
         }
     }
 }
