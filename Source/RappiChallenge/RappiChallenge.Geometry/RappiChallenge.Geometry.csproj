@@ -39,7 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GCube\IGCube.cs" />
+    <Compile Include="GCube\RappiCube.cs" />
+    <Compile Include="GeometryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\RappiChallenge.TO\RappiChallenge.TO.csproj">
+      <Project>{3d3e0b86-1dca-4728-8669-4a5a9742bf5c}</Project>
+      <Name>RappiChallenge.TO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

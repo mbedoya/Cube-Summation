@@ -1,0 +1,248 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Cube Summation</title>
+
+    <!-- Bootstrap -->
+    <link href='@Url.Content("~/Content/css/bootstrap.min.css")' rel="stylesheet"> 
+
+    <!-- Custom CSS -->
+    <link href='@Url.Content("~/Content/css/1-col-portfolio.css")' rel="stylesheet">
+
+    <style>
+        canvas {
+            width: 700px;
+            height: 550px;
+        }
+    </style>
+</head>
+<body>
+    
+     <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Cube Summation</a>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Change Dimensions -->
+        <div class="row">
+            <div class="col-md-7" >
+                
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label class="control-label" for="txtDimensions">Dimensiones:</label>
+                    <div >
+                      <input type="text" class="form-control" id="txtDimensions" placeholder="Ingrese las dimensiones (N)">
+                    </div>
+                  </div>
+                    <div class="form-group"> 
+                        <div >
+                          <input class="btn btn-default" type="button" id="btnChangeDimensions" value="Crear">
+                        </div>
+                      </div>
+                </form>
+
+            </div>
+            <div class="col-md-5">
+                <h4>Create</h4>
+                <p>Este permite crear un nuevo cubo con las dimensiones ingresadas (N).</p>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Update -->
+        <div class="row">
+            <div class="col-md-7">
+                
+            </div>
+            <div class="col-md-5">
+                <h4>Update</h4>
+                <p>Este permite modificar el valor de una posición en específico. <br />
+                    Selecciona X Y Z e ingresa el valor.</p>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Project Two -->
+        <div class="row">
+            <div class="col-md-7">
+                <a href="#">
+                    
+                </a>
+            </div>
+            <div class="col-md-5">
+                <h4>Select</h4>
+                <p>Permite calcular la suma de una región dada.</p>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Project Three -->
+        <div class="row">
+            <div class="col-md-7">
+                <div class="canvas_container">
+                    <canvas id="cube_canvas"></canvas>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h4>Cubo representativo</h4>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Mauricio Bedoya 2017</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- JQuery -->
+    <script src='@Url.Content("~/Scripts/jquery-3.1.1.min.js")'></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src='@Url.Content("~/Scripts/bootstrap.min.js")'></script>
+
+    <!-- Three -->
+    <script src='@Url.Content("~/Scripts/three.min.js")'></script>
+
+    <script>
+
+        <!-- Configuration -->
+    var myCanvas = document.getElementById('cube_canvas');
+    var width = 640;
+    var height = 480;
+
+    var scene;
+    var camera;
+    var renderer;
+    var geometry;
+
+    $(document).ready(function () {
+
+        //CONTROLS EVENTS
+        $("#btnChangeDimensions").on("click", function () {
+            var newDimensions = $("#txtDimensions").val();
+            initCube(newDimensions);
+        });
+
+        var controller = "Cube";
+
+        function ajaxPost(method, data, fx) {
+
+            $.ajax({
+                url: "/" + controller + "/" + method,
+                dataType: "json",
+                type: "POST",
+                data: data,
+                success: function (data) {
+                    fx(true, data);
+                },
+                error: function (a, b, c) {
+                    fx(false, a);
+                }
+            });
+        }
+
+        function init() {
+
+            //Get Cube Dimensions
+            ajaxPost("GetDimensions", {}, function (success, response) {
+
+                if (success) {
+
+                    console.log("Dimensions: " + response);
+
+                    initCube(response);
+
+                    //Get Cube values stored at Database
+                    ajaxPost("GetValues", {}, function (success, response) {
+
+                        if (success) {
+
+                            console.log(response);
+
+                        } else {
+                            alert("Error getting values: " + response);
+                        }
+                    });
+                } else {
+
+                    alert("Error getting dimensions: " + response);
+                }
+            });
+
+        }
+
+        function initCube(dimensions) {
+
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(80, width / height, 1, 10000);
+            var renderer = new THREE.WebGLRenderer({ canvas: myCanvas });
+            renderer.setSize(width, height);
+            renderer.setClearColor(0xffffff);
+
+            var geometry = new THREE.BoxGeometry(700, 700, 700, dimensions, dimensions, dimensions);
+            console.log(geometry.faces.length);
+            for (var i = 0; i < geometry.faces.length; i += 2) {
+                var hex = Math.random() * 0xffffff;
+                geometry.faces[i].color.setHex(hex);
+                geometry.faces[i + 1].color.setHex(hex);
+            }
+
+            var material = new THREE.MeshBasicMaterial({ vertexColors: THREE.FaceColors, overdraw: 0.5 });
+            cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+
+            camera.position.z = 1000;
+            var rotated = false;
+            function render() {
+                requestAnimationFrame(render);
+                if (!rotated) {
+                    rotated = true;
+                    cube.rotation.x += 10;
+                    cube.rotation.y += 10;
+                }
+                renderer.render(scene, camera);
+            };
+            render();
+        }
+
+        //Initialize data - it is retrieved from Database (Controller Service -> Database)
+        init();
+
+    });
+    </script>
+    
+</body>
+</html>

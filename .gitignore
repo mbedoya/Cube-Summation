@@ -50,3 +50,13 @@ Temporary Items
 # Visual Studio
 Source/RappiChallenge/Website/bin
 Source/RappiChallenge/Website/obj
+Source/RappiChallenge/RappiChallenge.TO/bin
+Source/RappiChallenge/RappiChallenge.TO/obj
+Source/RappiChallenge/RappiChallenge.Utility/bin
+Source/RappiChallenge/RappiChallenge.Utility/obj
+Source/RappiChallenge/RappiChallenge.Tests/bin
+Source/RappiChallenge/RappiChallenge.Tests/obj
+Source/RappiChallenge/RappiChallenge.Geometry/bin
+Source/RappiChallenge/RappiChallenge.Geometry/obj
+Source/RappiChallenge/RappiChallenge.Persistence/bin
+Source/RappiChallenge/RappiChallenge.Persistence/obj

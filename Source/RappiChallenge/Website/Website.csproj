@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CubeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -117,7 +118,35 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\1-col-portfolio.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\three.min.js" />
+    <Content Include="node_modules\cross-storage\dist\client.js" />
+    <Content Include="node_modules\cross-storage\dist\client.min.js" />
+    <Content Include="node_modules\cross-storage\dist\hub.js" />
+    <Content Include="node_modules\cross-storage\dist\hub.min.js" />
+    <Content Include="node_modules\cross-storage\example\client1.html" />
+    <Content Include="node_modules\cross-storage\example\client2.html" />
+    <Content Include="node_modules\cross-storage\example\hub.html" />
+    <Content Include="node_modules\cross-storage\gulpfile.js" />
+    <Content Include="node_modules\cross-storage\lib\client.js" />
+    <Content Include="node_modules\cross-storage\lib\hub.js" />
+    <Content Include="node_modules\cross-storage\lib\index.js" />
+    <Content Include="node_modules\cross-storage\media\logo.png" />
+    <Content Include="node_modules\cross-storage\test\getOnlyHub.html" />
+    <Content Include="node_modules\cross-storage\test\hub.html" />
+    <Content Include="node_modules\cross-storage\test\invalidOriginHub.html" />
+    <Content Include="node_modules\cross-storage\test\server.js" />
+    <Content Include="node_modules\cross-storage\test\test.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -129,11 +158,41 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Cube\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RappiChallenge.Geometry\RappiChallenge.Geometry.csproj">
+      <Project>{77755d7b-1a62-4fac-ba5e-a6ad47ae5be2}</Project>
+      <Name>RappiChallenge.Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RappiChallenge.TO\RappiChallenge.TO.csproj">
+      <Project>{3d3e0b86-1dca-4728-8669-4a5a9742bf5c}</Project>
+      <Name>RappiChallenge.TO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="node_modules\cross-storage\.npmignore" />
+    <Content Include="node_modules\cross-storage\.travis.yml" />
+    <Content Include="node_modules\cross-storage\.zuul.yml" />
+    <Content Include="node_modules\cross-storage\bower.json" />
+    <Content Include="node_modules\cross-storage\example\README.md" />
+    <Content Include="node_modules\cross-storage\LICENSE" />
+    <Content Include="node_modules\cross-storage\package.json" />
+    <Content Include="node_modules\cross-storage\README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
