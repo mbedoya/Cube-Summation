@@ -12,5 +12,7 @@ namespace RappiChallenge.Persistence.CubePersistence
         List<PointTO> GetValues();
 
         int GetDimensions();
+
+        bool Update(PointTO point);
     }
 }

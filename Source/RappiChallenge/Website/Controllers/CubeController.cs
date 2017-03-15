@@ -9,6 +9,7 @@ using System.Web.Mvc;
 //References to Geometry
 using RappiChallenge.Geometry;
 using RappiChallenge.Geometry.GCube;
+using RappiChallenge.TO;
 
 namespace Website.Controllers
 {
@@ -33,6 +34,14 @@ namespace Website.Controllers
             IGCube cube = GeometryFactory.GetCube();
 
             return Json(cube.GetDimensions(), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult UpdatePoint(PointTO point)
+        {
+            //Get Cube
+            IGCube cube = GeometryFactory.GetCube();
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -31,5 +31,26 @@ namespace RappiChallenge.Geometry.GCube
             }
             return dimensions;
         }
+
+
+        public bool Update(PointTO point)
+        {
+            ICubePersistence persistence = PersistenceFactory.GetCubePersistence();
+
+            //Check Boundaries
+            int dimensions = persistence.GetDimensions();
+
+            if (point.X == 0 || point.Y == 0 || point.Z == 0)
+            {
+                throw new Exception("Cube is index 1, 0 was sent for x, y or z");
+            }
+            
+            if (point.X > dimensions || point.Y > dimensions || point.Z > dimensions)
+            {
+                throw new Exception("Cube limits exceeded");
+            }
+
+            return persistence.Update(point);
+        }
     }
 }

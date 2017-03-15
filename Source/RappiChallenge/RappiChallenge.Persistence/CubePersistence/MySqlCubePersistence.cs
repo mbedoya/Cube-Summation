@@ -19,5 +19,11 @@ namespace RappiChallenge.Persistence.CubePersistence
         {
             return 3;
         }
+
+
+        public bool Update(PointTO point)
+        {
+            return true;
+        }
     }
 }

@@ -63,32 +63,6 @@ namespace RappiChallenge.Persistence.CubePersistence.MySql
 
             return items;
         }
-		
-        /*
-        public static CubeDataModel Get(int id)
-        {
-            CubeDataModel item = null;
-
-            MySqlConnection connection = new MySqlConnection(ConfigurationManager.AppSettings[Plenum.Data.Constants.AppSetting]);
-            MySqlDataAdapter adapter = new MySqlDataAdapter("Core_GetCubeByID", connection);
-            MySqlParameter paramID = new MySqlParameter("pId", id);
-            paramID.Direction = ParameterDirection.Input;
-            adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adapter.SelectCommand.Parameters.Add(paramID);
-
-            DataTable results = new DataTable();
-
-            adapter.Fill(results);			
-
-            if (results.Rows.Count > 0)
-            {
-                DataRow row = results.Rows[0];
-                item = MapItem(row);
-            }
-
-            return item;
-        }
-         */
 
         public static void Update(PointTO item)
         {

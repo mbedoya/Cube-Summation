@@ -193,18 +193,28 @@
         });
 
         $("#btnUpdate").on("click", function () {
+
+            //Get Values
             var x = $("#txtX").val();
             var y = $("#txtY").val();
             var z = $("#txtZ").val();
-            var point = { x: x, y: y, z: z };
+            var value = $("#txtValue").val();
+            var point = { x: x, y: y, z: z, value: value };
 
-            initCube(newDimensions);
-            setTimeout(function () {
-                initCube(newDimensions, point);
-            }, 1000);
-            setTimeout(function () {
-                initCube(newDimensions);
-            }, 2000);
+            initCube(newDimensions, point);
+
+            //Get Cube values stored at Database
+            ajaxPost("UpdatePoint", point, function (success, response) {
+                if (success) {
+                    
+                    setTimeout(function () {
+                        initCube(newDimensions);
+                    }, 1000);
+
+                } else {
+                    alert("Error updating: " + response);
+                }
+            });
         });
 
         var controller = "Cube";

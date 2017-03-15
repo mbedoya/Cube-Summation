@@ -19,5 +19,11 @@ namespace RappiChallenge.Geometry.GCube
         /// </summary>
         /// <returns>Return the N of the Cube or -1 if there is no Cube</returns>
         int GetDimensions();
+
+        /// <summary>
+        /// Update Cubes Point
+        /// </summary>
+        /// <param name="point">true if operation is successful</param>
+        bool Update(PointTO point);
     }
 }
