@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{7EC7D3B3-5B76-4748-8893-913A8C2771D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RappiChallenge.Tests", "RappiChallenge.Tests\RappiChallenge.Tests.csproj", "{055E81BA-E844-4C1D-A316-F3105CA201E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RappiChallenge.Geometry", "RappiChallenge.Geometry\RappiChallenge.Geometry.csproj", "{77755D7B-1A62-4FAC-BA5E-A6AD47AE5BE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RappiChallenge.Persistence", "RappiChallenge.Persistence\RappiChallenge.Persistence.csproj", "{F1481BF6-043F-4EBA-A71E-D178B168B0BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RappiChallenge.Utility", "RappiChallenge.Utility\RappiChallenge.Utility.csproj", "{8AEB127A-284E-4205-A132-1866F9E66A5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RappiChallenge.TO", "RappiChallenge.TO\RappiChallenge.TO.csproj", "{3D3E0B86-1DCA-4728-8669-4A5A9742BF5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7EC7D3B3-5B76-4748-8893-913A8C2771D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EC7D3B3-5B76-4748-8893-913A8C2771D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EC7D3B3-5B76-4748-8893-913A8C2771D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EC7D3B3-5B76-4748-8893-913A8C2771D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055E81BA-E844-4C1D-A316-F3105CA201E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055E81BA-E844-4C1D-A316-F3105CA201E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055E81BA-E844-4C1D-A316-F3105CA201E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055E81BA-E844-4C1D-A316-F3105CA201E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77755D7B-1A62-4FAC-BA5E-A6AD47AE5BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77755D7B-1A62-4FAC-BA5E-A6AD47AE5BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77755D7B-1A62-4FAC-BA5E-A6AD47AE5BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77755D7B-1A62-4FAC-BA5E-A6AD47AE5BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1481BF6-043F-4EBA-A71E-D178B168B0BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1481BF6-043F-4EBA-A71E-D178B168B0BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1481BF6-043F-4EBA-A71E-D178B168B0BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1481BF6-043F-4EBA-A71E-D178B168B0BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AEB127A-284E-4205-A132-1866F9E66A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AEB127A-284E-4205-A132-1866F9E66A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AEB127A-284E-4205-A132-1866F9E66A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AEB127A-284E-4205-A132-1866F9E66A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3E0B86-1DCA-4728-8669-4A5A9742BF5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3E0B86-1DCA-4728-8669-4A5A9742BF5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3E0B86-1DCA-4728-8669-4A5A9742BF5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3E0B86-1DCA-4728-8669-4A5A9742BF5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
