@@ -11,7 +11,7 @@
     <title>Cube Summation</title>
 
     <!-- Bootstrap -->
-    <link href='@Url.Content("~/Content/css/bootstrap.min.css")' rel="stylesheet"> 
+    <link href='@Url.Content("~/Content/css/bootstrap.min.css")' rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href='@Url.Content("~/Content/css/1-col-portfolio.css")' rel="stylesheet">
@@ -24,8 +24,8 @@
     </style>
 </head>
 <body>
-    
-     <!-- Navigation -->
+
+    <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -42,20 +42,20 @@
 
         <!-- Change Dimensions -->
         <div class="row">
-            <div class="col-md-7" >
-                
+            <div class="col-md-7">
+
                 <form class="form-horizontal">
-                  <div class="form-group">
-                    <label class="control-label" for="txtDimensions">Dimensiones:</label>
-                    <div >
-                      <input type="text" class="form-control" id="txtDimensions" placeholder="Ingrese las dimensiones (N)">
-                    </div>
-                  </div>
-                    <div class="form-group"> 
-                        <div >
-                          <input class="btn btn-default" type="button" id="btnChangeDimensions" value="Crear">
+                    <div class="form-group">
+                        <label class="control-label" for="txtDimensions">Dimensiones:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtDimensions" placeholder="Ingrese las dimensiones (N)">
                         </div>
-                      </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <input class="btn btn-default" type="button" id="btnChangeDimensions" value="Crear">
+                        </div>
+                    </div>
                 </form>
 
             </div>
@@ -71,12 +71,48 @@
         <!-- Update -->
         <div class="row">
             <div class="col-md-7">
-                
+
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label class="control-label" for="txtX">X:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtX" placeholder="Ingrese X">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txtY">Y:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtY" placeholder="Ingrese Y">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txtY">Z:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtZ" placeholder="Ingrese Z">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txtValue">Valor:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtValue" placeholder="Ingrese el Valor">
+                        </div>
+                    </div>                    
+                </form>
+
+                <div class="form-group">
+                    <div>
+                        <input class="btn btn-default" type="button" id="btnUpdate" value="Actualizar">
+                    </div>
+                </div>
+
             </div>
             <div class="col-md-5">
                 <h4>Update</h4>
-                <p>Este permite modificar el valor de una posición en específico. <br />
-                    Selecciona X Y Z e ingresa el valor.</p>
+                <p>
+                    Este permite modificar el valor de una posición en específico.
+                    <br />
+                    Selecciona X Y Z e ingresa el valor.
+                </p>
             </div>
         </div>
         <!-- /.row -->
@@ -86,9 +122,7 @@
         <!-- Project Two -->
         <div class="row">
             <div class="col-md-7">
-                <a href="#">
-                    
-                </a>
+                <a href="#"></a>
             </div>
             <div class="col-md-5">
                 <h4>Select</h4>
@@ -138,7 +172,7 @@
 
     <script>
 
-        <!-- Configuration -->
+     <!-- Configuration -->
     var myCanvas = document.getElementById('cube_canvas');
     var width = 640;
     var height = 480;
@@ -148,12 +182,29 @@
     var renderer;
     var geometry;
 
+    var newDimensions;
+
     $(document).ready(function () {
 
         //CONTROLS EVENTS
         $("#btnChangeDimensions").on("click", function () {
-            var newDimensions = $("#txtDimensions").val();
+            newDimensions = $("#txtDimensions").val();
             initCube(newDimensions);
+        });
+
+        $("#btnUpdate").on("click", function () {
+            var x = $("#txtX").val();
+            var y = $("#txtY").val();
+            var z = $("#txtZ").val();
+            var point = { x: x, y: y, z: z };
+
+            initCube(newDimensions);
+            setTimeout(function () {
+                initCube(newDimensions, point);
+            }, 1000);
+            setTimeout(function () {
+                initCube(newDimensions);
+            }, 2000);
         });
 
         var controller = "Cube";
@@ -182,8 +233,9 @@
                 if (success) {
 
                     console.log("Dimensions: " + response);
+                    newDimensions = response;
 
-                    initCube(response);
+                    initCube(newDimensions);
 
                     //Get Cube values stored at Database
                     ajaxPost("GetValues", {}, function (success, response) {
@@ -204,7 +256,7 @@
 
         }
 
-        function initCube(dimensions) {
+        function initCube(dimensions, rowToHighlight) {
 
             var scene = new THREE.Scene();
             var camera = new THREE.PerspectiveCamera(80, width / height, 1, 10000);
@@ -214,10 +266,31 @@
 
             var geometry = new THREE.BoxGeometry(700, 700, 700, dimensions, dimensions, dimensions);
             console.log(geometry.faces.length);
+
+            var hexArray = new Array(0x2e4045, 0x83adb5, 0x83fdb5);
+            var j = 1;
+
+            console.log(rowToHighlight);
+            console.log(typeof rowToHighlight !== "undefined");
+
             for (var i = 0; i < geometry.faces.length; i += 2) {
-                var hex = Math.random() * 0xffffff;
-                geometry.faces[i].color.setHex(hex);
-                geometry.faces[i + 1].color.setHex(hex);
+
+                //Display green cell when updated
+                if (typeof rowToHighlight !== "undefined" && 
+                    (( rowToHighlight.x == j) || (rowToHighlight.y == 1 && (newDimensions * 10 - newDimensions * rowToHighlight.x == j)))
+                    ){
+                    geometry.faces[i].color.setHex(0x098967);
+                    geometry.faces[i + 1].color.setHex(0x098967);
+                } else {
+                    if (newDimensions % 2 != 0) {
+                        geometry.faces[i].color.setHex(hexArray[j % 2]);
+                        geometry.faces[i + 1].color.setHex(hexArray[j % 2]);
+                    } else {
+                        geometry.faces[i].color.setHex(hexArray[j % 3]);
+                        geometry.faces[i + 1].color.setHex(hexArray[j % 3]);
+                    }
+                }
+                j++;
             }
 
             var material = new THREE.MeshBasicMaterial({ vertexColors: THREE.FaceColors, overdraw: 0.5 });
@@ -230,8 +303,9 @@
                 requestAnimationFrame(render);
                 if (!rotated) {
                     rotated = true;
-                    cube.rotation.x += 10;
-                    cube.rotation.y += 10;
+                    cube.rotation.x += 0.5;
+                    cube.rotation.y += 180;
+                    cube.rotation.z -= 0;
                 }
                 renderer.render(scene, camera);
             };
@@ -243,6 +317,6 @@
 
     });
     </script>
-    
+
 </body>
 </html>
