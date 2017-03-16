@@ -37,12 +37,12 @@ namespace RappiChallenge.Geometry.GCube
         {
             ICubePersistence persistence = PersistenceFactory.GetCubePersistence();
 
-            //Check Boundaries
             int dimensions = persistence.GetDimensions();
 
-            if (point.X == 0 || point.Y == 0 || point.Z == 0)
+            //Check Boundaries
+            if (point.X <= 0 || point.Y <= 0 || point.Z <= 0)
             {
-                throw new Exception("Cube is index 1, 0 was sent for x, y or z");
+                throw new Exception("Cube is index 1, lower numbers are not allowed for x, y or z");
             }
             
             if (point.X > dimensions || point.Y > dimensions || point.Z > dimensions)
@@ -50,7 +50,31 @@ namespace RappiChallenge.Geometry.GCube
                 throw new Exception("Cube limits exceeded");
             }
 
+            //Check Value
+            if (point.Value < Math.Pow(10, 9)*-1 || point.Value > Math.Pow(10, 9))
+            {
+                throw new Exception("Value is not allowed. -10^9 <= W <= 10^9");
+            }
+
             return persistence.Update(point);
+        }
+
+
+        public bool Create(int dimensions)
+        {
+            ICubePersistence persistence = PersistenceFactory.GetCubePersistence();
+
+            if (dimensions <= 0)
+            {
+                throw new Exception("Dimensions must be greater then Zero");
+            }
+
+            if (dimensions > 100)
+            {
+                throw new Exception("Maximum dimensions is 100");
+            }
+
+            return persistence.Create(dimensions);
         }
     }
 }

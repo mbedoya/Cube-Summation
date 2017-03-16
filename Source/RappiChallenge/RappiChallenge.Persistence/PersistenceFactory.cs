@@ -10,7 +10,7 @@ namespace RappiChallenge.Persistence
     {
         public static ICubePersistence GetCubePersistence()
         {
-            return new MySqlCubePersistence();
+            return new RappiCubePersistence();
         }
     }
 }

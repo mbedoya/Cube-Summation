@@ -5,10 +5,11 @@ using System.Text;
 
 using RappiChallenge.TO;
 using RappiChallenge.Persistence.CubePersistence.MySql;
+using RappiChallenge.Persistence.CubePersistence.IO;
 
 namespace RappiChallenge.Persistence.CubePersistence
 {
-    public class MySqlCubePersistence : ICubePersistence
+    public class RappiCubePersistence : ICubePersistence
     {
         public List<PointTO> GetValues()
         {
@@ -17,9 +18,8 @@ namespace RappiChallenge.Persistence.CubePersistence
 
         public int GetDimensions()
         {
-            return 3;
+            return IODAL.GetDimensions();
         }
-
 
         public bool Update(PointTO point)
         {
@@ -31,8 +31,22 @@ namespace RappiChallenge.Persistence.CubePersistence
             catch (Exception)
             {
                 return false;
+            }    
+        }
+
+        public bool Create(int dimensions)
+        {
+            try
+            {
+                MySqlDAL.Delete();
+                IODAL.SaveDimensions(dimensions);
+
+                return true;
             }
-            
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

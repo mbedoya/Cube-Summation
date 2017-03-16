@@ -25,5 +25,11 @@ namespace RappiChallenge.Geometry.GCube
         /// </summary>
         /// <param name="point">true if operation is successful</param>
         bool Update(PointTO point);
+
+        /// <summary>
+        /// Creates Cube
+        /// </summary>
+        /// <param name="dimensions">Dimensions (N) of the Cube</param>
+        bool Create(int dimensions);
     }
 }

@@ -125,16 +125,11 @@ namespace RappiChallenge.Persistence.CubePersistence.MySql
 			}
         }
 
-        public static void Delete(int id)
+        public static void Delete()
         {
             MySqlConnection connection = new MySqlConnection(ConfigurationManager.AppSettings[DB_AppSetting]);
             MySqlDataAdapter adapter = new MySqlDataAdapter("Core_DeleteCube", connection);
             adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-
-
-            MySqlParameter paramID = new MySqlParameter("pID", id);
-            paramID.Direction = ParameterDirection.Input;
-            adapter.SelectCommand.Parameters.Add(paramID);
 
             DataTable results = new DataTable();
             adapter.Fill(results);

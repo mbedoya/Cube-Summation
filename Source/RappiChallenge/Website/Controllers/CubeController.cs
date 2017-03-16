@@ -43,5 +43,13 @@ namespace Website.Controllers
 
             return Json(new { success = cube.Update(point) }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Create(int dimensions)
+        {
+            //Get Cube
+            IGCube cube = GeometryFactory.GetCube();
+
+            return Json(new { success = cube.Create(dimensions) }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

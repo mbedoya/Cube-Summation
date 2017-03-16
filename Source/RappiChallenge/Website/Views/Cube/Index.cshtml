@@ -142,6 +142,12 @@
             </div>
             <div class="col-md-5">
                 <h4>Cubo representativo</h4>
+                <p>
+                    Detalle de las accciones (Los errores muestran lo que devuelve la capa de "Negocio", esto para demostrar su comportamiento):
+                </p>
+                <div id="message" class="alert alert-success" style="visibility:hidden">
+                    
+                </div>
             </div>
         </div>
         <!-- /.row -->
@@ -177,6 +183,10 @@
     var width = 640;
     var height = 480;
 
+    //Service Controller
+    var controller = "Cube";
+
+    //Cube
     var scene;
     var camera;
     var renderer;
@@ -187,9 +197,22 @@
     $(document).ready(function () {
 
         //CONTROLS EVENTS
+
         $("#btnChangeDimensions").on("click", function () {
             newDimensions = $("#txtDimensions").val();
-            initCube(newDimensions);
+
+            //Create Cube at Database
+            ajaxPost("Create", { dimensions: newDimensions }, function (success, response) {
+                if (success) {
+
+                    showSuccessMessage("Has creado un nuevo Cubo con Dimensiones = " + newDimensions);
+                    initCube(newDimensions);
+
+                } else {
+                    console.log(response);
+                    showErrorMessage(response);
+                }
+            });
         });
 
         $("#btnUpdate").on("click", function () {
@@ -212,12 +235,33 @@
                     }, 1000);
 
                 } else {
-                    alert("Error updating: " + response);
+                    showErrorMessage(response);
                 }
             });
         });
 
-        var controller = "Cube";
+        //GENERAL METHODS
+
+        function showSuccessMessage(message) {
+            $("#message").addClass("alert-success");
+            $("#message").removeClass("alert-danger");
+            $("#message").css("visibility", "visible");
+            $("#message").html(message);
+        }
+
+        function showErrorMessage(message) {
+
+            var errorMessage = message;
+            if (typeof message.responseText !== "undefined") {
+                //Array[1]: title
+                message = $.parseHTML(message.responseText)[1].innerHTML;
+            }
+
+            $("#message").addClass("alert-danger");
+            $("#message").removeClass("alert-success");
+            $("#message").css("visibility", "visible");
+            $("#message").html(message);
+        }
 
         function ajaxPost(method, data, fx) {
 
@@ -245,6 +289,7 @@
                     console.log("Dimensions: " + response);
                     newDimensions = response;
 
+                    showSuccessMessage("Se ha cargado un Cubo de la base de datos con Dimensiones = " + newDimensions);
                     initCube(newDimensions);
 
                     //Get Cube values stored at Database
@@ -255,12 +300,12 @@
                             console.log(response);
 
                         } else {
-                            alert("Error getting values: " + response);
+                            showErrorMessage(response);
                         }
                     });
                 } else {
 
-                    alert("Error getting dimensions: " + response);
+                    showErrorMessage(response);
                 }
             });
 

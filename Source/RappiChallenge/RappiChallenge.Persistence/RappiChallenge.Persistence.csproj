@@ -45,7 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CubePersistence\ICubePersistence.cs" />
-    <Compile Include="CubePersistence\MySqlCubePersistence.cs" />
+    <Compile Include="CubePersistence\IO\IODAL.cs" />
+    <Compile Include="CubePersistence\RappiCubePersistence.cs" />
     <Compile Include="CubePersistence\MySql\MySqlDAL.cs" />
     <Compile Include="PersistenceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
