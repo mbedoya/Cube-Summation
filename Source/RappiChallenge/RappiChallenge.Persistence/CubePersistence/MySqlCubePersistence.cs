@@ -23,7 +23,16 @@ namespace RappiChallenge.Persistence.CubePersistence
 
         public bool Update(PointTO point)
         {
-            return true;
+            try
+            {
+                MySqlDAL.Update(point);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
     }
 }

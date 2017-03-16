@@ -41,7 +41,7 @@ namespace Website.Controllers
             //Get Cube
             IGCube cube = GeometryFactory.GetCube();
 
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = cube.Update(point) }, JsonRequestBehavior.AllowGet);
         }
     }
 }
