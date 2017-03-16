@@ -31,5 +31,13 @@ namespace RappiChallenge.Geometry.GCube
         /// </summary>
         /// <param name="dimensions">Dimensions (N) of the Cube</param>
         bool Create(int dimensions);
+
+        /// <summary>
+        /// Sum a Cubes Regions
+        /// </summary>
+        /// <param name="point1">Point 1</param>
+        /// <param name="point2">Point 2</param>
+        /// <returns>Sum of the Region</returns>
+        double SumRegion(PointTO point1, PointTO point2);
     }
 }

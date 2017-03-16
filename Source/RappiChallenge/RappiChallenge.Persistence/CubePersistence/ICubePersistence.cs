@@ -16,5 +16,7 @@ namespace RappiChallenge.Persistence.CubePersistence
         bool Update(PointTO point);
 
         bool Create(int dimensions);
+
+        double SumRegion(PointTO point1, PointTO point2);
     }
 }

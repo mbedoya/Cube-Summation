@@ -10,6 +10,9 @@ using System.Configuration;
 
 namespace RappiChallenge.Persistence.CubePersistence.MySql
 {
+    /// <summary>
+    /// Class to deal with MySql
+    /// </summary>
     public class MySqlDAL
     {
         private static string DB_AppSetting = "Database";
@@ -89,6 +92,46 @@ namespace RappiChallenge.Persistence.CubePersistence.MySql
 		
             DataTable results = new DataTable();
             adapter.Fill(results);
+        }
+
+        public static double SumRegion(PointTO point1, PointTO point2)
+        {
+            MySqlConnection connection = new MySqlConnection(ConfigurationManager.AppSettings[DB_AppSetting]);
+            MySqlDataAdapter adapter = new MySqlDataAdapter("Core_SumCubeRegion", connection);
+            adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+
+            MySqlParameter paramX = new MySqlParameter("pX1", point1.X);
+            paramX.Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters.Add(paramX);
+            MySqlParameter paramY = new MySqlParameter("pY1", point1.Y);
+            paramY.Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters.Add(paramY);
+            MySqlParameter paramZ = new MySqlParameter("pZ1", point1.Z);
+            paramZ.Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters.Add(paramZ);
+
+            MySqlParameter paramX1 = new MySqlParameter("pX2", point2.X);
+            paramX.Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters.Add(paramX1);
+            MySqlParameter paramY1 = new MySqlParameter("pY2", point2.Y);
+            paramY.Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters.Add(paramY1);
+            MySqlParameter paramZ1 = new MySqlParameter("pZ2", point2.Z);
+            paramZ.Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters.Add(paramZ1);
+
+            DataTable results = new DataTable();
+            adapter.Fill(results);
+
+            if (results.Rows.Count > 0)
+            {
+                return Convert.ToDouble(results.Rows[0]["Sum"]);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public static int Create(PointTO item)

@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="txtY">Z:</label>
+                        <label class="control-label" for="txtZ">Z:</label>
                         <div>
                             <input type="text" class="form-control" id="txtZ" placeholder="Ingrese Z">
                         </div>
@@ -122,7 +122,54 @@
         <!-- Project Two -->
         <div class="row">
             <div class="col-md-7">
-                <a href="#"></a>
+               
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label class="control-label" for="txtX1">X1:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtX1" placeholder="Ingrese X1" value="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txtY1">Y1:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtY1" placeholder="Ingrese Y1" value="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txtZ1">Z1:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtZ1" placeholder="Ingrese Z1" value="1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="txtX2">X2:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtX2" placeholder="Ingrese X2" value="2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txtY2">Y2:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtY2" placeholder="Ingrese Y2" value="2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="txtZ2">Z2:</label>
+                        <div>
+                            <input type="text" class="form-control" id="txtZ2" placeholder="Ingrese Z2" value="2">
+                        </div>
+                    </div>
+                    
+                </form>
+
+                <div class="form-group">
+                    <div>
+                        <input class="btn btn-default" type="button" id="btnSum" value="Sumar">
+                    </div>
+                </div>
+
             </div>
             <div class="col-md-5">
                 <h4>Select</h4>
@@ -215,6 +262,39 @@
             });
         });
 
+        //Sum
+        $("#btnSum").on("click", function () {
+
+            //Get Values
+            var x = $("#txtX1").val();
+            var y = $("#txtY1").val();
+            var z = $("#txtZ1").val();
+            var point = { x: x, y: y, z: z};
+
+            var x1 = $("#txtX2").val();
+            var y1 = $("#txtY2").val();
+            var z1 = $("#txtZ2").val();
+            var point1 = { x: x1, y: y1, z: z1};
+
+            initCube(newDimensions, point);
+
+            //Get Cube values stored at Database
+            ajaxPost("SumRegion", { x1: point.x, y1: point.y, z1: point.z, x2: point1.x, y2: point1.y, z2: point1.z }, function (success, response) {
+                if (success) {
+
+                    showSuccessMessage("La suma es: " + response.sum);
+
+                    setTimeout(function () {
+                        initCube(newDimensions);
+                    }, 1000);
+
+                } else {
+                    showErrorMessage(response);
+                }
+            });
+        });
+
+        //Update
         $("#btnUpdate").on("click", function () {
 
             //Get Values
@@ -230,6 +310,7 @@
             ajaxPost("UpdatePoint", point, function (success, response) {
                 if (success) {
                     
+                    showSuccessMessage("Se ha actualizado el valor (" + point.value + ") para " + point.x + "," + point.y + "," + point.z);
                     setTimeout(function () {
                         initCube(newDimensions);
                     }, 1000);

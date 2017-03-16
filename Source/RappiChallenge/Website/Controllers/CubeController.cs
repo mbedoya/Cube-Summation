@@ -51,5 +51,16 @@ namespace Website.Controllers
 
             return Json(new { success = cube.Create(dimensions) }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult SumRegion(int x1, int y1, int z1, int x2, int y2, int z2)
+        {
+            //Get Cube
+            IGCube cube = GeometryFactory.GetCube();
+
+            PointTO point1 = new PointTO() { X = x1, Y = y1, Z = z1 };
+            PointTO point2 = new PointTO() { X = x2, Y = y2, Z = z2 };
+
+            return Json(new { sum = cube.SumRegion(point1, point2) }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

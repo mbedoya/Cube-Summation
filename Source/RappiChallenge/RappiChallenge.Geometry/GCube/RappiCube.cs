@@ -13,6 +13,23 @@ namespace RappiChallenge.Geometry.GCube
     /// </summary>
     public class RappiCube : IGCube
     {
+        private void ValidatePoint(PointTO point)
+        {
+            ICubePersistence persistence = PersistenceFactory.GetCubePersistence();
+            int dimensions = persistence.GetDimensions();
+
+            //Check Boundaries
+            if (point.X <= 0 || point.Y <= 0 || point.Z <= 0)
+            {
+                throw new Exception("Cube is index 1, lower numbers are not allowed for x, y or z");
+            }
+
+            if (point.X > dimensions || point.Y > dimensions || point.Z > dimensions)
+            {
+                throw new Exception("Cube limits exceeded");
+            }
+        }
+
         public List<PointTO> GetValues()
         {
             ICubePersistence persistence = PersistenceFactory.GetCubePersistence();
@@ -37,18 +54,8 @@ namespace RappiChallenge.Geometry.GCube
         {
             ICubePersistence persistence = PersistenceFactory.GetCubePersistence();
 
-            int dimensions = persistence.GetDimensions();
-
-            //Check Boundaries
-            if (point.X <= 0 || point.Y <= 0 || point.Z <= 0)
-            {
-                throw new Exception("Cube is index 1, lower numbers are not allowed for x, y or z");
-            }
-            
-            if (point.X > dimensions || point.Y > dimensions || point.Z > dimensions)
-            {
-                throw new Exception("Cube limits exceeded");
-            }
+            //Point Validations
+            ValidatePoint(point);
 
             //Check Value
             if (point.Value < Math.Pow(10, 9)*-1 || point.Value > Math.Pow(10, 9))
@@ -75,6 +82,20 @@ namespace RappiChallenge.Geometry.GCube
             }
 
             return persistence.Create(dimensions);
+        }
+
+
+        public double SumRegion(PointTO point1, PointTO point2)
+        {
+            ICubePersistence persistence = PersistenceFactory.GetCubePersistence();
+
+            //Point Validations
+            ValidatePoint(point1);
+
+            //Point Validations
+            ValidatePoint(point2);
+
+            return persistence.SumRegion(point1, point2);
         }
     }
 }
